@@ -1,9 +1,7 @@
 #!/usr/bin/env python3.7
-#https://habr.com/post/332078/ - по образу статьи калякаем скрипт для набора словаря
+#Для формирования словаря будем использовать уже имеющиеся заявка в ES.
 
-#import re	#????
-#import porter	#Процедура стемминга(процесс нахождения основы слова)
-import classifactor as clsf
+import classifactor as clsf 
 import logging
 import json
 from elasticsearch import Elasticsearch, RequestsHttpConnection
