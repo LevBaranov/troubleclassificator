@@ -21,7 +21,8 @@ class Porter:
 		word = word.lower()
 		word = word.replace(u'ё', u'е')
 		m = re.match(Porter.RVRE, word)
-		if m.groups():
+		print(word)
+		if m and m.groups():
 			pre = m.group(1)
 			rv = m.group(2)
 			temp = Porter.PERFECTIVEGROUND.sub('', rv, 1)
