@@ -3,7 +3,6 @@ import re
 import porter
 
 def get_dict(string):
-	text = 'Необходимо найти последовательность 12 задач'
 	patern = re.compile(r"[\s\d$+<>№=;:,.()/#\[\]]")
 	latin = 'a-z' 
 	string = string.lower()
