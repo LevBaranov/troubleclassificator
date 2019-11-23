@@ -3,6 +3,7 @@
 
 import classifactor as clsf 
 import logging
+import random
 import json
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 
@@ -20,7 +21,7 @@ def search(es_object, index_name, search, size):
 	res = es_object.search(index=index_name, body=search, size=size)
 	return res
 
-
+"""
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.ERROR)
 	es = connect_elastic()
@@ -38,3 +39,17 @@ if __name__ == '__main__':
 		#res = result[_source]
 	diction = clsf.sort_dict(diction)
 	print(diction)
+"""
+if __name__ == '__main__':
+	logging.basicConfig(level=logging.ERROR)
+	es = connect_elastic()
+	if es is not None:
+		index = 'tickets'
+		size = 9999
+		search_body = {"query": {"exists":{"field":"category"}}}
+		results = search(es, index, json.dumps(search_body), size)
+		ids =[]
+		for hit in results['hits']['hits']:
+			_id = hit['_id']
+			ids.append(_id)
+		random.choice(ids)
