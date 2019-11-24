@@ -20,6 +20,12 @@ def sort_dict(l):
         if i not in n:
             n.append(i)
     return n
-
+def get_token(word):
+	patern = re.compile(r"[\s\d$+<>№=;:,.()/#\[\]]")
+	latin = 'a-z'
+	word = patern.split(word.lower())
+	token = porter.Porter().stem(word)
+	return token
 #get_dict('дключен через конечный к БМ uybh 123')
-
+#token = get_token('Не работает ПД, по EQM привязки нет, по адресу УК нет, клиент со своей стороны оборудование проверил, клиент уточнил МАСи которые должны видить в канале 00-25-45-87-b0-89. Телефон: (89065438200).')
+#print(token)
