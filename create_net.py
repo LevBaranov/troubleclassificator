@@ -9,7 +9,7 @@ from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.tools.customxml import NetworkWriter
 from pybrain.structure import TanhLayer, SoftmaxLayer, LinearLayer
 
-net = buildNetwork(len(dict.train_x[0]), 1, len(dict.train_y[0]), hiddenclass=LinearLayer, outclass=SoftmaxLayer)
+net = buildNetwork(len(dict.train_x[0]), 1, len(dict.train_y[0]), hiddenclass=LinearLayer, recurrent=True)
 ds = SupervisedDataSet(len(dict.train_x[0]), len(dict.train_y[0]))
 i = 0
 for inp in dict.train_x:
@@ -17,7 +17,7 @@ for inp in dict.train_x:
     i += 1
 
 trainer = BackpropTrainer(net, ds, learningrate=0.05)
-trainer.trainEpochs(1000)
+trainer.trainEpochs(50)
 
-NetworkWriter.writeToFile(net, 'net.xml')
+NetworkWriter.writeToFile(net, 'net2.xml')
 

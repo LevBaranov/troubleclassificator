@@ -1,7 +1,6 @@
 #!/usr/bin/env python3.7
 #Для формирования словаря будем использовать уже имеющиеся заявка в ES.
 
-import classifactor as clsf 
 import logging
 import random
 import json
@@ -34,7 +33,7 @@ if __name__ == '__main__':
 		for hit in results['hits']['hits']:
 			_id = hit['_id']
 			ids.append(_id)
-		for number in range(20):
+		for number in range(50):
 			t_id = random.choice(ids)
 			ticket = es.get(index = 'tickets', id = t_id)
 			category = ticket['_source']['category']
@@ -73,6 +72,6 @@ if __name__ == '__main__':
 				else:
 					data_dict[category] = [info]
 		#print(data_dict)
-		my_file = open("data.json", "w")
+		my_file = open("data2.json", "w")
 		my_file.write(json.dumps(data_dict, ensure_ascii=False))
 		my_file.close()

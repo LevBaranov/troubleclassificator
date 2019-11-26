@@ -7,22 +7,18 @@ import random
 #from pybrain.supervised.trainers import BackpropTrainer
 #from pybrain.tools.customxml import NetworkWriter
 
-def get_tf_record(sentence):
+def get_tf_record(string_to_vec):
     global words
-    # tokenize the pattern
-    sentence_words = sentence
-    # stem each word
-    sentence_words = [word.lower() for word in sentence_words]
-    # bag of words
+    sentence_words = [word for word in string_to_vec.split()]
     bow = [0]*len(words)
     for s in sentence_words:
         for i, w in enumerate(words):
             if w == s:
-                bow[i] = 1
+               bow[i] = 1
     return(np.array(bow))
 
 # read the json file and load the training data
-with open('data.json') as json_data:
+with open('data2.json') as json_data:
     data = json.load(json_data)
     #print(data)
 # get a list of all categories to train for
@@ -37,8 +33,9 @@ for each_category in data.keys():
         docs.append(([w for w in each_sentence.split(' ')], each_category))
 # stem and lower each word and remove duplicates
 words = [(w.lower()) for w in words]
-print(words)
+#print(words)
 words = sorted(list(set(words)))
+print(words)
 #print(words)
 print(docs)
 
@@ -52,7 +49,7 @@ for doc in docs:
     bow = []
     # list of tokenized words for the pattern
     token_words = doc[0]
-    token_words = [(word.lower()) for word in token_words]
+    token_words = [word for word in token_words]
     # create our bag of words array
     for w in words:
         bow.append(1) if w in token_words else bow.append(0)
@@ -62,11 +59,16 @@ for doc in docs:
     # which catefory that bow belongs to.
     training.append([bow, output_row])
 # shuffle our features and turn into np.array as tensorflow  takes in numpy array
-random.shuffle(training)
+#random.shuffle(training)
 training = np.array(training)
 # trainX contains the Bag of words and train_y contains the label/ category
 train_x = list(training[:, 0])
 train_y = list(training[:, 1])
+
+print(train_x)
+print('==============')
+print(train_y)
+
 '''
 net = buildNetwork(len(train_x[0]), 1, len(train_y[0]))
 ds = SupervisedDataSet(len(train_x[0]), len(train_y[0]))
