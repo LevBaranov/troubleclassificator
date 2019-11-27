@@ -20,7 +20,6 @@ def get_tf_record(string_to_vec):
 # read the json file and load the training data
 with open('data2.json') as json_data:
     data = json.load(json_data)
-    #print(data)
 # get a list of all categories to train for
 categories = list(data.keys())
 words = []
@@ -33,11 +32,7 @@ for each_category in data.keys():
         docs.append(([w for w in each_sentence.split(' ')], each_category))
 # stem and lower each word and remove duplicates
 words = [(w.lower()) for w in words]
-#print(words)
 words = sorted(list(set(words)))
-print(words)
-#print(words)
-print(docs)
 
 # create our training data
 training = []
@@ -64,28 +59,4 @@ training = np.array(training)
 # trainX contains the Bag of words and train_y contains the label/ category
 train_x = list(training[:, 0])
 train_y = list(training[:, 1])
-
-print(train_x)
-print('==============')
-print(train_y)
-
-'''
-net = buildNetwork(len(train_x[0]), 1, len(train_y[0]))
-ds = SupervisedDataSet(len(train_x[0]), len(train_y[0]))
-i = 0
-for inp in train_x:
-    ds.addSample(inp, train_y[i])
-    i += 1
-
-trainer = BackpropTrainer(net, ds, learningrate=0.05)
-trainer.trainEpochs(1000) 
-
-NetworkWriter.writeToFile(net, 'net.xml')
-#net = NetworkReader.readFrom('filename.xml')
-inp = get_tf_record('УК порт 4  Нет связи, линк м МАС приходит, оборудование перезагрузили, не помогло. по логам нестабильный линк.')
-print(inp)
-out = net.activate(inp)
-print(categories[np.argmax(out)])
-print(out)
-'''
 
