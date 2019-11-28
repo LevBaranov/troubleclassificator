@@ -9,10 +9,10 @@ import dict
 
 #text = str(input())
 text = sys.argv[1]
-net = NetworkReader.readFrom('net2.xml')
+net = NetworkReader.readFrom('net.xml')
 inp = dict.get_tf_record(text)
 print(inp)
 out = net.activate(inp)
-print(dict.categories[np.argmax(out)])
 print(out)
+print(dict.categories[np.argmax(out)])
 

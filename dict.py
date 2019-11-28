@@ -9,7 +9,7 @@ import random
 
 def get_tf_record(string_to_vec):
     global words
-    sentence_words = [word for word in string_to_vec.split()]
+    sentence_words = [word.lower() for word in string_to_vec.split()]
     bow = [0]*len(words)
     for s in sentence_words:
         for i, w in enumerate(words):
@@ -18,7 +18,7 @@ def get_tf_record(string_to_vec):
     return(np.array(bow))
 
 # read the json file and load the training data
-with open('data2.json') as json_data:
+with open('data.json') as json_data:
     data = json.load(json_data)
 # get a list of all categories to train for
 categories = list(data.keys())
